@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  postgre:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_USER: "root"
+      POSTGRES_DB: "phoenix_todo_dev"
+    ports:
+      - 5432:5432
