@@ -7,6 +7,7 @@ defmodule PhoenixTodoWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug PhoenixTodoWeb.Auth
   end
 
   pipeline :api do
@@ -17,6 +18,8 @@ defmodule PhoenixTodoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
