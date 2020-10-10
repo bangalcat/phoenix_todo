@@ -19,7 +19,10 @@ defmodule PhoenixTodoWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/users", UserController
+    resources "/users", UserController,
+      only: [:index, :show, :new, :edit, :update, :create, :delete]
+
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.
