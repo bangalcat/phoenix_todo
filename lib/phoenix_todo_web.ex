@@ -23,6 +23,7 @@ defmodule PhoenixTodoWeb do
 
       import Plug.Conn
       import PhoenixTodoWeb.Gettext
+      import PhoenixTodoWeb.Auth, only: [authenticate_user: 2]
       alias PhoenixTodoWeb.Router.Helpers, as: Routes
     end
   end
@@ -48,6 +49,7 @@ defmodule PhoenixTodoWeb do
 
       import Plug.Conn
       import Phoenix.Controller
+      import PhoenixTodoWeb.Auth, only: [authenticate_user: 2]
     end
   end
 

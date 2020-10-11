@@ -1,0 +1,23 @@
+<h1>Show Todo Item</h1>
+
+<ul>
+
+  <li>
+    <strong>description:</strong>
+    <%= @item.description %>
+  </li>
+
+  <li>
+    <strong>is_done:</strong>
+    <%= @item.is_done %>
+  </li>
+
+  <li>
+    <strong>priority</strong>
+    <%= @item.priority %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.todo_path(@conn, :edit, @item) %></span>
+<span><%= link "Back", to: Routes.todo_path(@conn, :index) %></span>

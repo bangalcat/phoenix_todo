@@ -4,7 +4,7 @@ defmodule PhoenixTodoWeb.UserController do
   alias PhoenixTodo.Accounts
   alias PhoenixTodo.Accounts.User
 
-  plug :authenticate when action in [:index, :show]
+  plug :authenticate_user when action in [:index, :show]
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -61,16 +61,5 @@ defmodule PhoenixTodoWeb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: Routes.user_path(conn, :index))
-  end
-
-  defp authenticate(conn, _opts) do
-    if conn.assigns.current_user do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You must be logged in")
-      |> redirect(to: Routes.page_path(conn, :index))
-      |> halt()
-    end
   end
 end

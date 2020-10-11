@@ -23,6 +23,7 @@ defmodule PhoenixTodoWeb.Router do
       only: [:index, :show, :new, :edit, :update, :create, :delete]
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/todos", TodoController
   end
 
   # Other scopes may use custom stacks.

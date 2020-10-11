@@ -3,10 +3,12 @@ defmodule PhoenixTodo.Todos do
   The Todos context.
   """
 
+  import PhoenixTodo.Todos.ItemQuery
   import Ecto.Query, warn: false
   alias PhoenixTodo.Repo
 
-  alias PhoenixTodo.Todos.Item
+  alias __MODULE__.Item
+  alias PhoenixTodo.Accounts
 
   @doc """
   Returns the list of items.
@@ -19,6 +21,18 @@ defmodule PhoenixTodo.Todos do
   """
   def list_items do
     Repo.all(Item)
+  end
+
+  def list_user_items(%Accounts.User{} = user) do
+    Item
+    |> user_todos_query(user)
+    |> Repo.all()
+  end
+
+  def get_user_todo_item!(%Accounts.User{} = user, id) do
+    Item
+    |> user_todos_query(user)
+    |> Repo.get!(id)
   end
 
   @doc """
@@ -49,9 +63,10 @@ defmodule PhoenixTodo.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_item(attrs \\ %{}) do
+  def create_item(%Accounts.User{} = user, attrs \\ %{}) do
     %Item{}
     |> Item.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
   end
 

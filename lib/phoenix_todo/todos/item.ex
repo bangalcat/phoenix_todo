@@ -7,6 +7,8 @@ defmodule PhoenixTodo.Todos.Item do
     field :is_done, :boolean, default: false
     field :priority, :string
 
+    belongs_to :user, PhoenixTodo.Accounts.User
+
     timestamps()
   end
 
