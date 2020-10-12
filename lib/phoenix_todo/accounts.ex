@@ -58,10 +58,6 @@ defmodule PhoenixTodo.Accounts do
     |> Repo.insert()
   end
 
-  @spec update_user(
-          PhoenixTodo.Accounts.User.t(),
-          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
-        ) :: any
   @doc """
   Updates a user.
 

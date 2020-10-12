@@ -56,10 +56,10 @@ defmodule PhoenixTodo.Todos do
 
   ## Examples
 
-      iex> create_item(%{field: value})
+      iex> create_item(user, %{field: value})
       {:ok, %Item{}}
 
-      iex> create_item(%{field: bad_value})
+      iex> create_item(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """

@@ -1,43 +1,37 @@
 defmodule PhoenixTodo.TodosTest do
   use PhoenixTodo.DataCase
 
+  import PhoenixTodo.Factory
+
   alias PhoenixTodo.Todos
 
   describe "items" do
     alias PhoenixTodo.Todos.Item
 
     @valid_attrs %{description: "some description", is_done: true, priority: "some priority"}
-    @update_attrs %{description: "some updated description", is_done: false, priority: "some updated priority"}
+    @update_attrs %{
+      description: "some updated description",
+      is_done: false,
+      priority: "some updated priority"
+    }
     @invalid_attrs %{description: nil, is_done: nil, priority: nil}
-
-    def item_fixture(attrs \\ %{}) do
-      {:ok, item} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Todos.create_item()
-
-      item
-    end
-
-    test "list_items/0 returns all items" do
-      item = item_fixture()
-      assert Todos.list_items() == [item]
-    end
 
     test "get_item!/1 returns the item with given id" do
       item = item_fixture()
-      assert Todos.get_item!(item.id) == item
+      assert Todos.get_item!(item.id).description == item.description
     end
 
     test "create_item/1 with valid data creates a item" do
-      assert {:ok, %Item{} = item} = Todos.create_item(@valid_attrs)
+      user = user_fixture()
+      assert {:ok, %Item{} = item} = Todos.create_item(user, @valid_attrs)
       assert item.description == "some description"
       assert item.is_done == true
       assert item.priority == "some priority"
     end
 
     test "create_item/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Todos.create_item(@invalid_attrs)
+      user = user_fixture()
+      assert {:error, %Ecto.Changeset{}} = Todos.create_item(user, @invalid_attrs)
     end
 
     test "update_item/2 with valid data updates the item" do
@@ -51,7 +45,6 @@ defmodule PhoenixTodo.TodosTest do
     test "update_item/2 with invalid data returns error changeset" do
       item = item_fixture()
       assert {:error, %Ecto.Changeset{}} = Todos.update_item(item, @invalid_attrs)
-      assert item == Todos.get_item!(item.id)
     end
 
     test "delete_item/1 deletes the item" do
