@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :phoenix_todo, PhoenixTodo.Repo,
-  username: "root",
-  password: "root",
+  username: "postgres",
+  password: "postgres",
   database: "phoenix_todo_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

@@ -5,17 +5,10 @@
 
 <section class="row">
   <article class="column">
-    <h2>Resources</h2>
+    <h2>Navigate</h2>
     <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
+      <li><%= link "User List", to: Routes.user_path(@conn, :index) %></li>
+      <li><%= link "Todo List", to: Routes.todo_path(@conn, :index) %></li>
     </ul>
   </article>
 </section>
